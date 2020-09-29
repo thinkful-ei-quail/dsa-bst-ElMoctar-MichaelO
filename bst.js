@@ -274,3 +274,37 @@ function balancedBST(tree) {
 // console.log(balancedBST(balanced))
 // console.log(balancedBST(BST))
 
+
+function checkBSTFromArray(arr1, arr2) {
+  if (arr1.length !== arr2.length || arr1[0] !== arr2[0]) return false;
+  if (arr1.length === 0 || arr2.length === 0) return true;
+
+  const higher1 = [];
+  const higher2 = [];
+  const lower1 = [];
+  const lower2 = [];
+
+  for (let i = 1; i < arr1.length; i++) {
+    if (arr1[i] > arr1[0]) {
+      higher1.push(arr1[i]);
+    } else {
+      lower1.push(arr1[i]);
+    }
+  }
+
+  for (let i = 1; i < arr2.length; i++) {
+    if (arr2[i] > arr2[0]) {
+      higher2.push(arr2[i]);
+    } else {
+      lower2.push(arr2[i]);
+    }
+  }
+
+  return (
+    checkBSTFromArray(higher1, higher2) && checkBSTFromArray(lower1, lower2)
+  );
+}
+
+const arr1 = [3, 5, 4, 6, 1, 0, 2];
+const arr2 = [3, 1, 5, 2, 4, 6, 0];
+console.log(checkBSTFromArray(arr1, arr2));
